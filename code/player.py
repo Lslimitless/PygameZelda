@@ -39,7 +39,8 @@ class Player(pygame.sprite.Sprite):
         self.rect.center += self.direction * speed
         
         # pygame.rect 는 실수를 표현할 수 없기 때문에 소수 대입 시 반올림으로 적용함
-            # 예전에는 버림 처리 하였기에 좌,우 그리고 상,하 각각 이동거리가 달랐음
+        # 예전에는 버림 처리 하였기에 좌,우 그리고 상,하 각각 이동거리가 달랐음
+        # pos값을 따로 관리하고 rect에 pos값을 대입하는것이 좋겠음
 
     def collision(self, direction):
         if direction == 'horizontal':
