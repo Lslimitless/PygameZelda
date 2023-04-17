@@ -1,4 +1,5 @@
 import pygame
+from random import choice
 from settings import *
 from support import *
 from tile import Tile
@@ -21,6 +22,11 @@ class Level:
             'grass': import_csv_layout('./map/map_Grass.csv'),
             'object': import_csv_layout('./map/map_Objects.csv')
         }
+        graphics = {
+            'grass': import_folder('./graphics/grass'),
+            'objects': import_folder('./graphics/objects')
+        }
+        
         for style, layout in layouts.items():
             for row_index, row in enumerate(layout):
                 for col_index, col in enumerate(row):
@@ -30,14 +36,12 @@ class Level:
                         if style == 'boundary':
                             Tile((x, y), [self.obstacle_sprites], 'invisible')
                         if style == 'grass':
-                            pass
+                            random_grass_image = choice(graphics['grass'])
+                            Tile((x, y), [self.visible_sprites, self.obstacle_sprites], 'grass', random_grass_image)
                         if style == 'object':
-                            pass
+                            surf = graphics['objects'][int(col)]
+                            Tile((x, y), [self.visible_sprites, self.obstacle_sprites], 'object', surf)
                             
-        #         if col == 'x':
-        #             Tile((x, y), [self.visible_sprites, self.obstacle_sprites])
-        #         if col == 'p':
-        #             self.player = Player((x, y), [self.visible_sprites], self.obstacle_sprites)
         self.player = Player((1920, 640), [self.visible_sprites], self.obstacle_sprites)
         
     def run(self):
