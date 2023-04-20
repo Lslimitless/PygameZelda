@@ -12,8 +12,8 @@ def import_csv_layout(path):
 
 def import_folder(path):
     surface_list = []
-    
-    for _,__,img_files in walk(path):
+    # os.walk(path) -> root, dirs, files (위치, 하위 폴더들, 하위 파일들)
+    for _, __, img_files in walk(path):
         for image in img_files:
             full_path = path + '/' + image
             image_surf = pygame.image.load(full_path).convert_alpha()

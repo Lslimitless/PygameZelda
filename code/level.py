@@ -17,6 +17,7 @@ class Level:
         self.create_map()
 
     def create_map(self):
+        # 딕셔너리 자료형. layouts['grass'] 형태로 값 참조 -> ['1', '2', '2', '5', ···]
         layouts = {
             'boundary': import_csv_layout('./map/map_FloorBlocks.csv'),
             'grass': import_csv_layout('./map/map_Grass.csv'),
@@ -26,7 +27,7 @@ class Level:
             'grass': import_folder('./graphics/grass'),
             'objects': import_folder('./graphics/objects')
         }
-        
+        # item() 메소드 사용 시 딕셔너리의 키와 값의 쌍을 반환함 layouts.item() -> 'boundary' : ['1', '5', '1', ···]
         for style, layout in layouts.items():
             for row_index, row in enumerate(layout):
                 for col_index, col in enumerate(row):
