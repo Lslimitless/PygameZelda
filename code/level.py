@@ -4,6 +4,7 @@ from settings import *
 from support import *
 from tile import Tile
 from player import Player
+from debug import debug
 
 class Level:
 
@@ -49,6 +50,7 @@ class Level:
 
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
+        debug(self.player.status)
 
 
 class YSortCameraGroup(pygame.sprite.Group):
