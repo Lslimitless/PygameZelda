@@ -6,6 +6,7 @@ from tile import Tile
 from player import Player
 from debug import debug
 from weapon import Weapon
+from ui import UI
 
 class Level:
     def __init__(self):
@@ -23,6 +24,9 @@ class Level:
         # sprite setup
         self.create_map()
 
+        # user interface
+        self.ui = UI()
+
     def create_map(self):
         # 딕셔너리 자료형. layouts['grass'] 형태로 값 참조 -> ['1', '2', '2', '5', ···]
         layouts = {
@@ -34,7 +38,7 @@ class Level:
             'grass': import_folder('./graphics/grass'),
             'objects': import_folder('./graphics/objects')
         }
-        # item() 메소드 사용 시 딕셔너리의 키와 값의 쌍을 반환함 layouts.item() -> 'boundary' : ['1', '5', '1', ···]
+        # item() 메소드 사용 시 딕셔너리의 키와 값의 쌍을 반환함 layouts.item() -> 'boundary' : ['1', '5', '1', ···], ···
         for style, layout in layouts.items():
             for row_index, row in enumerate(layout):
                 for col_index, col in enumerate(row):
@@ -60,13 +64,11 @@ class Level:
             self.current_attack.kill()
         self.cureent_attack = None
           
-
     def run(self):
 
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
-        debug(self.player.status)
-
+        self.ui.display(self.player)
 
 class YSortCameraGroup(pygame.sprite.Group): 
     def __init__(self):
